@@ -1,0 +1,50 @@
+Audio Formats We Need to Care About
+
+-> Uncompressed - RAW Audio that professionals, audio engineers, singers, studios generate
+
+-> Lossless Compressed Audio Formats - 
+	-> MPEG-4 SLS
+	-> AAC
+
+-> Classical Lossy formats
+	-> MP3
+	-> PCM
+	-> DSD
+	-> 
+	-> Ogg Vorbis -> Used by spotify for its streaming service
+
+-> WMA (Lossless)
+-> WMA (Lossy)
+-> FLAC (Frees Lossless Audio Codec)
+-> WAV and AIFF
+
+###########################################################################
+
+What to do with FFMpeg ?
+
+Examples
+
+Convert and audio file to AAC format in an M4A container
+ -> ffmpeg -i input.wav -c:a libfdk_aac -b:a 128k output.m4a
+
+Convert 5.1 surroundsound audio of a video, leaving video along
+ -> ffmpeg -i input.mp4 -c:v copy -c:a libfdk_aac -b:a 384k output.mp4
+
+Convert video with libx264 and mix down audio to two channels
+ -> ffmpeg -i input.mp4 -c:v libx264 -crf 22 -preset:v veryfast -ac 2 -c:a libfdk_aac -vbr 3 output.mp4
+
+High Efficiency AAC
+
+This is a pair of AAC profiles tailured for low bitrates
+Version 1 : Suited for bitrates below 64kb/s to 48 kb/s
+Version 2 : Suited for bitrates as low as 32 kb/s
+
+HE-AAC Version 1:
+ffmpeg -i input.wav -c:a libfdk_aac -profile:a aac_he -b:a 64k output.m4a
+
+HE_AAC Version 2:
+ffmpeg -i input.wav -c:a libfdk_aac -profile:a aac_he_v2 -b:a 32k output.m4a
+
+ffmpeg -i input.wav -metadata author="Ankur Debnath" -metadata title="Decode my Heart (Let's Mux)" output.m4a
+
+
